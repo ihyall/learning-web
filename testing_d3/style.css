@@ -1,0 +1,26 @@
+body {
+    background-color: #1b1b1b;
+    color: white;
+    font-family: Inter, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+}
+label {
+    color: white;
+}
+input {
+    color: white;
+    background-color: #3b3b3b;
+    padding: 10px;
+    border: 1px solid white;
+}
+input:hover {
+    color: white;
+    background-color: rgb(75, 75, 75);
+    padding: 10px;
+    border: 1px solid white;
+    font-language-override: "en";
+}
+
+div {
+    background-color: #1b1b1b;
+    color: white;
+}
