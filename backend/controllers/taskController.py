@@ -30,12 +30,17 @@ def saveAnswer(answer: Answer):
     fileService = FileService(CONFIG)
     filename = f"answers_{answer.task_id}.json"
 
+    if not fileService.checkIfFileExists(filename):
+        fileService.writeJSON(filename, [])
+
     data: list[dict] = fileService.readJSON(filename)
 
     for i, ans in enumerate(data):
         if answer.user_id == ans["user_id"]:
             del data[i]
 
+    answer.date = answer.date.__str__()
+    answer.data = answer.data.__dict__
     data.append(answer.__dict__)
 
     fileService.writeJSON(filename, data)

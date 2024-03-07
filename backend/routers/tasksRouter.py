@@ -1,6 +1,5 @@
 import sys
 from fastapi import APIRouter, HTTPException
-import os
 
 sys.path.append("..")
 
@@ -19,6 +18,3 @@ def getTaskById(id: int):
 @router.put("/api/save-answer")
 def putAnswer(answer: Answer):
     saveAnswer(answer)
-
-
-putAnswer(Answer(1, 2,  "03.07.2024", "new data2"))

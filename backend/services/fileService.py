@@ -13,7 +13,7 @@ class FileService:
         return os.path.abspath(path)
     
     def checkIfFileExists(self, filename: str):
-        return (filename in os.listdir(self.CONFIG["inputFolder"]))
+        return (filename in os.listdir(self.CONFIG["inputPath"]))
 
     @staticmethod
     def createIfEmpty(path: str, foldername: str):
@@ -21,7 +21,7 @@ class FileService:
             os.mkdir(os.path.join(path, foldername))
 
     def getFile(self, filename: str) -> TextIOWrapper:
-        return open(self.CONFIG["inputFolder"] + filename, mode="r", encoding="utf-8")
+        return open(self.CONFIG["inputPath"] + filename, mode="r", encoding="utf-8")
 
     @staticmethod
     def getFileAsString(path: str) -> str:
