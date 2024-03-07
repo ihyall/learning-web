@@ -9,10 +9,8 @@ sys.path.append("..")
 from services.fileService import FileService
 
 def processTaskByIdRequest(id: int):
-    # return 1
     with open("config.toml", "r") as f:
         CONFIG = f.read()
-        # return CONFIG
         CONFIG = tomllib.loads(CONFIG)
 
     fileService = FileService(CONFIG["processTaskByIdRequest"])
