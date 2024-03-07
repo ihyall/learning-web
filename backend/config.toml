@@ -1,2 +1,6 @@
-[processTaskByIdRequest]
-inputFolder = "taskData/"
+[tasks]
+inputPath = "taskData/tasks/"
+
+[answers]
+inputPath = "taskData/answers/"
+outputPath = "taskData/answers/"

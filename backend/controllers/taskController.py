@@ -7,14 +7,14 @@ from fastapi import HTTPException
 sys.path.append("..")
 
 from services.fileService import FileService
+from utils.answer import Answer
 
 def processTaskByIdRequest(id: int):
-    with open("config.toml", "r") as f:
-        CONFIG = f.read()
-        CONFIG = tomllib.loads(CONFIG)
+    with open("config.toml", "rb") as f:
+        CONFIG = tomllib.load(f)["tasks"]
 
-    fileService = FileService(CONFIG["processTaskByIdRequest"])
-    filename = f"task{id}.json"
+    fileService = FileService(CONFIG)
+    filename = f"task_{id}.json"
 
 
     if fileService.checkIfFileExists(filename):
@@ -22,3 +22,20 @@ def processTaskByIdRequest(id: int):
         taskData = json.load(taskFile)
         taskFile.close()
         return taskData
+
+def saveAnswer(answer: Answer):
+    with open("config.toml", "rb") as f:
+        CONFIG = tomllib.load(f)["answers"]
+
+    fileService = FileService(CONFIG)
+    filename = f"answers_{answer.task_id}.json"
+
+    data: list[dict] = fileService.readJSON(filename)
+
+    for i, ans in enumerate(data):
+        if answer.user_id == ans["user_id"]:
+            del data[i]
+
+    data.append(answer.__dict__)
+
+    fileService.writeJSON(filename, data)

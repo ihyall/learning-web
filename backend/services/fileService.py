@@ -27,6 +27,10 @@ class FileService:
     def getFileAsString(path: str) -> str:
         with open(path, mode="r", encoding="utf-8") as f:
             return f.read()
+        
+    def readJSON(self, filename, encoding:str="utf-8") -> list[dict] | dict:
+        with open(self.CONFIG["inputPath"] + filename, encoding=encoding) as f:
+            return json.load(f)
 
     @staticmethod
     def getAllFilePaths(path: str) -> list[str]:
@@ -43,9 +47,9 @@ class FileService:
         return files
 
     def writeCSV(self, filename: str, obj: list[dict]) -> None:
-        self.createIfEmpty(self.CONFIG["output_folder"], "csv")
+        self.createIfEmpty(self.CONFIG["outputPath"], "csv")
         with open(
-            os.path.join(self.CONFIG["output_folder"], "csv", filename),
+            os.path.join(self.CONFIG["outputPath"], "csv", filename),
             mode="w",
             encoding="utf-8",
         ) as f:
@@ -53,18 +57,19 @@ class FileService:
             csv.writer(f, lineterminator="\n").writerows(list(map(lambda x: list(x.values()), obj)))
 
     def writeJSON(self, filename: str, obj) -> None:
-        self.createIfEmpty(self.CONFIG["output_folder"], "json")
+        # self.createIfEmpty(self.CONFIG["outputPath"], "json")
         with open(
-            os.path.join(self.CONFIG["output_folder"], "json", filename),
+            # os.path.join(self.CONFIG["outputPath"], "json", filename),
+            os.path.join(self.CONFIG["outputPath"], filename),
             mode="w",
             encoding="utf-8",
         ) as f:
             json.dump(obj, f, indent=4, ensure_ascii=False)
 
     def continuedWriteFile(self, filename: str, lines: list[str]) -> None:
-        self.createIfEmpty(self.CONFIG["output_folder"], "txt")
+        self.createIfEmpty(self.CONFIG["outputPath"], "txt")
         with open(
-            os.path.join(self.CONFIG["output_folder"], "txt", filename),
+            os.path.join(self.CONFIG["outputPath"], "txt", filename),
             mode="a",
             encoding="utf-8",
         ) as f:

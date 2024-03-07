@@ -1,11 +1,11 @@
 import sys
 from fastapi import APIRouter, HTTPException
-import asyncio
 import os
 
 sys.path.append("..")
 
-from controllers.taskController import processTaskByIdRequest
+from controllers.taskController import processTaskByIdRequest, saveAnswer
+from utils.answer import Answer
 
 router = APIRouter()
 
@@ -15,3 +15,10 @@ def getTaskById(id: int):
     if task:
         return task
     raise HTTPException(404, "Task not found")
+
+@router.put("/api/save-answer")
+def putAnswer(answer: Answer):
+    saveAnswer(answer)
+
+
+putAnswer(Answer(1, 2,  "03.07.2024", "new data2"))
