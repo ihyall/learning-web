@@ -44,3 +44,22 @@ def saveAnswer(answer: Answer):
     data.append(answer.__dict__)
 
     fileService.writeJSON(filename, data)
+
+
+
+
+def getAllTasks():
+    with open("config.toml", "rb") as f:
+        CONFIG = tomllib.load(f)['tasks']
+
+    fileService = FileService(CONFIG)
+
+    tasks = {}
+    files = fileService.getAllFileNamesRecursive(CONFIG['inputPath'])
+    
+    for file in files:
+        task = fileService.readJSON(file.split('/')[-1])
+        tasks[task["id"]] = task
+    
+    return tasks
+

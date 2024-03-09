@@ -3,7 +3,8 @@ from fastapi import APIRouter, HTTPException
 
 sys.path.append("..")
 
-from controllers.taskController import processTaskByIdRequest, saveAnswer
+from controllers.taskController import processTaskByIdRequest, \
+    saveAnswer, getAllTasks
 from utils.answer import Answer
 
 router = APIRouter()
@@ -18,3 +19,9 @@ def getTaskById(id: int):
 @router.put("/api/save-answer")
 def putAnswer(answer: Answer):
     saveAnswer(answer)
+
+
+
+@router.get("/api/get-all-tasks")
+def getTasks():
+    return getAllTasks()
