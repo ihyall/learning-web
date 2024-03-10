@@ -18,3 +18,8 @@ def getTaskById(id: int):
     raise HTTPException(404, "Task not found")
 
 # TODO get, put, delete, patch тут не знаю надо ли это, как будут задачи создаваться
+
+
+@router.get("/api/get-all-tasks")
+def getTasks():
+    return getAllTasks()
