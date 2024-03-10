@@ -1,11 +1,8 @@
 from fastapi import FastAPI
-from routers import tasksRouter
+from routers import tasksRouter, answersRouter
 
 
 app = FastAPI()
 
 app.include_router(tasksRouter.router)
-
-@app.get("/")
-def root():
-    return "Hello world"
+app.include_router(answersRouter.router)

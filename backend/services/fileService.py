@@ -20,8 +20,8 @@ class FileService:
         if foldername not in os.listdir(path):
             os.mkdir(os.path.join(path, foldername))
 
-    def getFile(self, filename: str) -> TextIOWrapper:
-        return open(self.CONFIG["inputPath"] + filename, mode="r", encoding="utf-8")
+    def getFile(self, filename: str, encoding:str="utf-8") -> TextIOWrapper:
+        return open(self.CONFIG["inputPath"] + filename, mode="r", encoding=encoding)
 
     @staticmethod
     def getFileAsString(path: str) -> str:
@@ -29,8 +29,10 @@ class FileService:
             return f.read()
         
     def readJSON(self, filename, encoding:str="utf-8") -> list[dict] | dict:
-        with open(self.CONFIG["inputPath"] + filename, encoding=encoding) as f:
-            return json.load(f)
+        f = self.getFile(filename)
+        data = json.load(f)
+        f.close()
+        return data
 
     @staticmethod
     def getAllFilePaths(path: str) -> list[str]:

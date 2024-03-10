@@ -1,20 +1,20 @@
 import sys
+from webbrowser import get
 from fastapi import APIRouter, HTTPException
 
 sys.path.append("..")
 
-from controllers.taskController import processTaskByIdRequest, saveAnswer
-from utils.answer import Answer
+from services.taskService import TaskService
+from dataClasses.answer import Answer
 
 router = APIRouter()
 
-@router.get("/api")
+@router.get("/tasks/{id}")
 def getTaskById(id: int):
-    task = processTaskByIdRequest(id)
+    taskService = TaskService()
+    task = taskService.getTask(id)
     if task:
         return task
     raise HTTPException(404, "Task not found")
 
-@router.put("/api/save-answer")
-def putAnswer(answer: Answer):
-    saveAnswer(answer)
+# TODO get, put, delete, patch тут не знаю надо ли это, как будут задачи создаваться
