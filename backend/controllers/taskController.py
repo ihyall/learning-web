@@ -7,7 +7,7 @@ from fastapi import HTTPException
 sys.path.append("..")
 
 from services.fileService import FileService
-from utils.answer import Answer
+from dataClasses.answer import Answer
 
 def processTaskByIdRequest(id: int):
     with open("config.toml", "rb") as f:

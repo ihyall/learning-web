@@ -4,6 +4,7 @@ from fastapi import APIRouter, HTTPException
 
 sys.path.append("..")
 
+from controllers.taskController import getAllTasks
 from services.taskService import TaskService
 from dataClasses.answer import Answer
 
@@ -20,6 +21,7 @@ def getTaskById(id: int):
 # TODO get, put, delete, patch тут не знаю надо ли это, как будут задачи создаваться
 
 
+# это Егору надо поменять
 @router.get("/api/get-all-tasks")
 def getTasks():
     return getAllTasks()
