@@ -15,12 +15,12 @@ function buildGraphSpace() {
         .style("height", height)
         .style("width", width)
         .style("border", "dashed red");
+        
+    let g_links = svg.append("g")
+        .attr("id", "g-links");
 
     let g_nodes = svg.append("g")
         .attr("id", "g-nodes");
-
-    let g_links = svg.append("g")
-        .attr("id", "g-links");
 }
 
 function addNode(event) {
