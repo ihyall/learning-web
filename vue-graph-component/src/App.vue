@@ -1,9 +1,16 @@
 <script setup>
-import Graph from './components/Graph.vue'
+import Graph from './components/Graph.vue';
 </script>
 
 <template>
-  <main>
-    <Graph />
-  </main>
+    <main oncontextmenu="return false;">
+        <Graph />
+    </main>
 </template>
+
+
+<style scoped>
+    main {
+        user-select: none;
+    }
+</style>
