@@ -38,24 +38,9 @@ function addNode(event) {
         .on("")
 }
 
-function linkClickHandler(event) {
-    console.log(event.which)
-    if (event.which == 1) {
-        console.log("lmb")
-    } else {
-        console.log("ese")
-        if (event.which == 3) {
-            console.log("rmb")
-            deleteLink(event)
-        }
-    }
-}
-
 function addLink(event) {
-    
     if (linkCoords.length < 2) {
         linkCoords.push({ cx: d3.select(event.currentTarget).attr('cx'), cy: d3.select(event.currentTarget).attr('cy')})
-        console.log(linkCoords)
     }
     
     if (linkCoords.length == 2)
@@ -76,8 +61,7 @@ function addLink(event) {
                         .attr("y2", linkCoords[1]['cy'])
                         .style("stroke", "rgb(0, 255, 0)")
                         .style("stroke-width", "3px")
-                        // .style("pointer-events", "none")
-                        .on("contextmenu", (event) => linkClickHandler(event))
+                        .on("contextmenu", (event) => deleteLink(event))
                 }
             }
         linkCoords = []
