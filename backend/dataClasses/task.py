@@ -4,4 +4,6 @@ from dataclasses import dataclass
 class Task:
     id: int
     name: str
-    data: str
+    graph: dict
+    ontology: dict
+    text: dict
