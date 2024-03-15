@@ -168,8 +168,10 @@ function deleteLink(event) {
 }
 
 function deleteNode(event) {
+    let node = d3.select(event.currentTarget)
+
     let linksToDelete = links.map(function(x) {
-        if (x.from == d3.select(event.currentTarget).attr("id") || x.to == d3.select(event.currentTarget).attr("id")) {
+        if (x.from == node.attr("id") || x.to == node.attr("id")) {
             return x
         }
     })
@@ -184,7 +186,8 @@ function deleteNode(event) {
         linkToDelete.remove()
     })
 
-    d3.select(event.currentTarget).remove()
+    nodes.splice(nodes.findIndex((x) => x.id == node.attr("id")), 1)
+    node.remove()
 }
 
 
